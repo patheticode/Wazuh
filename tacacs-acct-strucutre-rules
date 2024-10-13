@@ -1,0 +1,47 @@
+<!-- Rules dla tac_plus.acct -->
+<group name="tacacs, tacacs_acct, failed login, login, login_failure,access_control,authentication_failed, syslog">
+    <rule id="100010" level="3">
+        <decoded_as>tacacs-acct</decoded_as>
+        <description>Base rule for TACACS accounting logs.</description>
+        <group>tacacs,authentication</group>
+    </rule>
+    
+    <rule id="100011" level="5">
+        <if_sid>100010</if_sid>
+        <field name="reason" type="pcre2">.*logged in successfully.*</field>
+        <description>TACACS - Successful login by user $(dstuser) from $(destip)</description>
+        <group>tacacs,authentication_success</group>
+        <mitre>
+            <id>T1078</id>
+        </mitre>
+    </rule>
+    
+    <rule id="100012" level="7">
+        <if_sid>100010</if_sid>
+        <field name="priv_lvl" type="pcre2">15</field>
+        <description>TACACS - User $(dstuser) gained privileged access level $(priv_lvl) on $(destip)</description>
+        <group>tacacs,privilege_escalation</group>
+        <mitre>
+            <id>T1068</id>
+        </mitre>
+    </rule>
+    
+        <rule id="100013" level="8">
+        <if_sid>100010</if_sid>
+        <field name="cmd" type="pcre2">.*\b(configure|set|add|delete)\b.*</field>
+        <description>TACACS - Configuration change command executed by $(dstuser) on $(destip)</description>
+        <group>tacacs,configuration_change,</group>
+        <mitre>
+            <id>T1602</id>
+        </mitre>
+    </rule>
+    
+    <rule id="100014" level="12">
+        <field name="reason" type="pcre2">.*login failed.*</field>
+        <description>TACACS - Failed login attempt by user $(dstuser) from $(destip)</description>
+        <group>tacacs,authentication_failed</group>
+        <mitre>
+            <id>T1078</id>
+        </mitre>
+    </rule>
+</group>
