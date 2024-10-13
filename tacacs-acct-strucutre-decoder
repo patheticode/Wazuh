@@ -1,0 +1,108 @@
+<!-- Dekodery dla tac_plus.acct -->
+<!-- REMEBER WITH <OUT_FORMAT> -->
+
+<decoder name="tacacs-acct">
+    <prematch type="pcre2">^TACACSACCT\s+</prematch>
+</decoder>
+
+<decoder name="tacacs-acct">
+    <parent>tacacs-acct</parent>
+    <regex type="pcre2">^TACACSACCT\s+([A-Z][a-z]{2}\s+\d+\s+\d{2}:\d{2}:\d{2})\s+</regex>
+    <order>datetime</order>
+</decoder>
+
+
+<decoder name="tacacs-acct">
+    <parent>tacacs-acct</parent>
+    <regex type="pcre2">^TACACSACCT\s+[^\t]+\t([^\t]+)</regex>
+    <order>srcip</order>
+</decoder>
+
+
+<decoder name="tacacs-acct">
+    <parent>tacacs-acct</parent>
+    <regex type="pcre2">^TACACSACCT\s+[^\t]+\t[^\t]+\t([^\t]+)</regex>
+    <order>user</order>
+</decoder>
+
+
+<decoder name="tacacs-acct">
+    <parent>tacacs-acct</parent>
+    <regex type="pcre2">^TACACSACCT\s+[^\t]+\t[^\t]+\t[^\t]+\t([^\t]+)</regex>
+    <order>terminal</order>
+</decoder>
+
+
+<decoder name="tacacs-acct">
+    <parent>tacacs-acct</parent>
+    <regex type="pcre2">^TACACSACCT\s+[^\t]+\t[^\t]+\t[^\t]+\t[^\t]+\t([^\t]+)</regex>
+    <order>destip</order>
+</decoder>
+
+
+<decoder name="tacacs-acct">
+    <parent>tacacs-acct</parent>
+    <regex type="pcre2">^TACACSACCT\s+\t(\w+)(\t|$)</regex>
+    <order>action</order>
+</decoder>
+
+
+<decoder name="tacacs-acct">
+    <parent>tacacs-acct</parent>
+    <regex type="pcre2">task_id=(\d+)</regex>
+    <order>task_id</order>
+</decoder>
+
+<decoder name="tacacs-acct">
+    <parent>tacacs-acct</parent>
+    <regex type="pcre2">timezone=([^\s]+)</regex>
+    <order>timezone</order>
+</decoder>
+
+<decoder name="tacacs-acct">
+    <parent>tacacs-acct</parent>
+    <regex type="pcre2">service=([^\t]+)</regex>
+    <order>service</order>
+</decoder>
+
+<decoder name="tacacs-acct">
+    <parent>tacacs-acct</parent>
+    <regex type="pcre2">event=([^\t]+)</regex>
+    <order>event</order>
+</decoder>
+
+<decoder name="tacacs-acct">
+    <parent>tacacs-acct</parent>
+    <regex type="pcre2">stop_time=(\d+)</regex>
+    <order>stop_time</order>
+</decoder>
+
+<decoder name="tacacs-acct">
+    <parent>tacacs-acct</parent>
+    <regex type="pcre2">reason="([^"]+)"</regex>
+    <order>reason</order>
+</decoder>
+
+<decoder name="tacacs-acct">
+    <parent>tacacs-acct</parent>
+    <regex type="pcre2">task_id=(\d+)</regex>
+    <order>task_id</order>
+</decoder>
+
+<decoder name="tacacs-acct">
+    <parent>tacacs-acct</parent>
+    <regex type="pcre2">start_time=(\d+)</regex>
+    <order>start_time</order>
+</decoder>
+
+<decoder name="tacacs-acct">
+    <parent>tacacs-acct</parent>
+    <regex type="pcre2">priv-lvl=(\d+)</regex>
+    <order>priv_lvl</order>
+</decoder>
+
+<decoder name="tacacs-acct">
+    <parent>tacacs-acct</parent>
+    <regex type="pcre2">cmd=(.*)</regex>
+    <order>cmd</order>
+</decoder>
